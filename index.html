@@ -78,7 +78,7 @@ footer { margin-top: 56px; color: var(--muted); font-size: 13px; }
     <div class="sample-head"><strong>예시 글 · 기행문</strong><span id="len"></span></div>
     <pre id="sample">강화도에 다녀와서
 
-지난 토요일에 가족과 강화도에 다녀왔다. 아침 일찍 차를 타고 출발해서 강화대교를 건넜다. 처음 간 곳은 고인돌 공원이었다. 커다란 돌이 있었다. 그다음에는 시장에 가서 순무 김치랑 꽈배기를 먹었다. 마지막으로 바닷가에 가서 갯벌을 보았다. 집에 오는 길에는 차에서 잤다. 재미있었다.</pre>
+지난 토요일에 가족과 강화도에 다녀왔다. 아침 일찍 차를 타고 출발해서 강화대교를 건넜다. 처음 간 곳은 고인돌 공원이었다. 커다란 돌이 있었다. 그다음에는 시장에 가서 순무 김치랑 꽈배기를 먹었다. 마지막으로 바닷가에 가서 갯벌을 보았다. 갯벌에는 작은 게들이 많았다. 엄마는 사진을 많이 찍었다. 집에 오는 길에는 차에서 잤다. 재미있었다.</pre>
     <button class="btn accent" id="copy">복사</button><span class="done" id="done"></span>
   </div>
 
@@ -90,7 +90,7 @@ document.querySelectorAll('.qr').forEach(el => {
   try { new QRCode(el, { text: el.dataset.url, width: 320, height: 320, correctLevel: QRCode.CorrectLevel.M }); } catch (e) {}
 });
 const text = document.getElementById('sample').textContent;
-document.getElementById('len').textContent = `${text.replace(/\s/g, '').length}자 (띄어쓰기 빼고)`;
+document.getElementById('len').textContent = `${text.length}자`;
 document.getElementById('copy').onclick = async () => {
   const done = document.getElementById('done');
   try { await navigator.clipboard.writeText(text); done.textContent = '복사했어요. 글쓰기 칸에 붙여 넣으세요.'; }
