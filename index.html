@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>연합학술제 웹앱 체험</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #F6F6F4; --card: #FFFFFF; --ink: #1D1D1F; --muted: #6B6B70; --line: #E4E4E0; --accent: #2AC1BC; --accent-ink: #062B2A; }
+@media (prefers-color-scheme: dark) { :root { --bg: #141416; --card: #1F1F22; --ink: #F2F2F2; --muted: #A0A0A6; --line: #303034; --accent: #2AC1BC; --accent-ink: #062B2A; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Noto Sans KR', system-ui, sans-serif; line-height: 1.6; word-break: keep-all; }
+main { max-width: 1040px; margin: 0 auto; padding: 40px 16px 64px; }
+.kicker { display: inline-block; padding: 4px 14px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 700; font-size: 14px; }
+h1 { margin: 14px 0 4px; font-size: clamp(28px, 5vw, 44px); font-weight: 900; line-height: 1.25; }
+.sub { margin: 0 0 32px; color: var(--muted); }
+h2 { margin: 48px 0 16px; font-size: 24px; font-weight: 900; }
+.apps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.app { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 24px; text-align: center; }
+.qr { width: 180px; height: 180px; margin: 0 auto 16px; padding: 10px; background: #fff; border-radius: 12px; }
+.qr img, .qr canvas { width: 100% !important; height: 100% !important; }
+.app h3 { margin: 0 0 4px; font-size: 22px; font-weight: 900; }
+.app p { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
+.btn { display: inline-block; padding: 10px 20px; border: 0; border-radius: 999px; background: var(--ink); color: var(--bg); font: 700 15px/1.2 inherit; font-family: inherit; text-decoration: none; cursor: pointer; }
+.btn.accent { background: var(--accent); color: var(--accent-ink); }
+.code { display: inline-block; margin-top: 10px; font-size: 14px; color: var(--muted); }
+.code b { color: var(--ink); letter-spacing: .12em; font-size: 18px; }
+.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 10px; }
+.steps li { counter-increment: s; display: flex; gap: 14px; align-items: flex-start; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; }
+.steps li::before { content: counter(s); flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-weight: 900; font-size: 15px; }
+.sample { margin-top: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 24px; }
+.sample-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.sample-head strong { font-size: 18px; }
+.sample-head span { color: var(--muted); font-size: 14px; }
+.sample pre { margin: 0 0 16px; white-space: pre-wrap; font: 400 17px/1.8 'Noto Sans KR', sans-serif; background: var(--bg); border-radius: 12px; padding: 18px; }
+.done { margin-left: 10px; color: var(--muted); font-size: 14px; }
+footer { margin-top: 56px; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <span class="kicker">2026 국어 연합학술제</span>
+  <h1>생성형 AI를 활용한 교육 자료 개발</h1>
+  <p class="sub">발표에서 소개한 웹앱을 직접 해 보세요. 휴대폰은 QR, 노트북은 버튼을 누르면 됩니다.</p>
+
+  <section class="apps">
+    <div class="app">
+      <div class="qr" data-url="https://script.google.com/macros/s/AKfycby-ahsOSiTpGR5fnvS9rUhULYY-_Q_gzD_6qBsE_oNrCvPp4sslgJspycZDIjNjITNraQ/exec"></div>
+      <h3>기후 탐사대</h3>
+      <p>서·논술형 평가 웹앱</p>
+      <a class="btn" href="https://script.google.com/macros/s/AKfycby-ahsOSiTpGR5fnvS9rUhULYY-_Q_gzD_6qBsE_oNrCvPp4sslgJspycZDIjNjITNraQ/exec" target="_blank" rel="noopener">열기 ↗</a>
+    </div>
+    <div class="app">
+      <div class="qr" data-url="https://ai-trace-case01.netlify.app"></div>
+      <h3>AI TRACE</h3>
+      <p>디지털 윤리 수업 웹앱</p>
+      <a class="btn" href="https://ai-trace-case01.netlify.app" target="_blank" rel="noopener">열기 ↗</a>
+    </div>
+    <div class="app">
+      <div class="qr" data-url="https://dino-writing-coach.vercel.app/join/DN9YQV"></div>
+      <h3>DINO</h3>
+      <p>글쓰기 코칭 웹앱</p>
+      <a class="btn accent" href="https://dino-writing-coach.vercel.app/join/DN9YQV" target="_blank" rel="noopener">열기 ↗</a>
+      <div class="code">참여 코드 <b>DN9YQV</b></div>
+    </div>
+  </section>
+
+  <h2>DINO 체험 순서</h2>
+  <ol class="steps">
+    <li>위 DINO 「열기」를 누르거나 QR을 찍어 들어가요. (참여 코드 DN9YQV)</li>
+    <li>이름 칸에 아무 이름이나 쓰고 「글쓰기 시작하기」를 눌러요.</li>
+    <li>아래 예시 글을 「복사」해서 글쓰기 칸에 붙여 넣어요. 직접 써도 좋아요.</li>
+    <li>「코칭 받기」를 누르고, 디노가 준 수정 미션대로 고친 뒤 다시 코칭을 받아 보세요.</li>
+  </ol>
+
+  <div class="sample">
+    <div class="sample-head"><strong>예시 글 · 기행문</strong><span id="len"></span></div>
+    <pre id="sample">강화도에 다녀와서
+
+지난 토요일에 가족과 강화도에 다녀왔다. 아침 일찍 차를 타고 출발해서 강화대교를 건넜다. 처음 간 곳은 고인돌 공원이었다. 커다란 돌이 있었다. 그다음에는 시장에 가서 순무 김치랑 꽈배기를 먹었다. 마지막으로 바닷가에 가서 갯벌을 보았다. 집에 오는 길에는 차에서 잤다. 재미있었다.</pre>
+    <button class="btn accent" id="copy">복사</button><span class="done" id="done"></span>
+  </div>
+
+  <footer>인천효성남초 양상경 · 2026. 10. 29 · 체험용 활동은 연합학술제가 끝나면 지웁니다.</footer>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+document.querySelectorAll('.qr').forEach(el => {
+  try { new QRCode(el, { text: el.dataset.url, width: 320, height: 320, correctLevel: QRCode.CorrectLevel.M }); } catch (e) {}
+});
+const text = document.getElementById('sample').textContent;
+document.getElementById('len').textContent = `${text.replace(/\s/g, '').length}자 (띄어쓰기 빼고)`;
+document.getElementById('copy').onclick = async () => {
+  const done = document.getElementById('done');
+  try { await navigator.clipboard.writeText(text); done.textContent = '복사했어요. 글쓰기 칸에 붙여 넣으세요.'; }
+  catch (e) {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('sample'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    done.textContent = '글이 선택됐어요. Ctrl+C로 복사하세요.';
+  }
+};
+</script>
+</body>
+</html>
