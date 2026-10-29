@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="ko" data-theme="light" data-brand="baemin">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>연합학술제 발표</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=Nanum+Myeongjo:wght@400;700&family=Noto+Sans+KR:wght@400;600;700;900&display=swap">
+<style>
+/* 인터넷이 없을 때 쓰는 제목 글꼴 (글꼴 폴더) */
+@font-face { font-family: "Do Hyeon Local"; src: url("글꼴/DoHyeon-Regular.ttf") format("truetype"); font-display: swap; }
+/* deck 스킬 뼈대. 브랜드 토큰은 insane-design examples/<브랜드>/design.md에서 가져옴 */
+/* 장 기본은 성찰회 배치(sc-). 색·글꼴은 브랜드 변수 */
+:root {
+  --font: "SF Pro Display", "SF Pro Text", -apple-system, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+  --font-d: var(--font);
+  --w-d: 600; --ls-d: -0.022em; --lh-d: 1.07;
+  --r-tile: 36px; --r-btn: 980px; --r-chip: 980px;
+  --shadow: none;
+  --side-w: 260px;
+}
+/* 애플 낮 */
+:root[data-theme="light"] {
+  --bg: #F5F5F7; --bg-alt: #FFFFFF;
+  --tile: #FFFFFF; --tile-alt: #F5F5F7;
+  --ink: #1D1D1F; --muted: #6E6E73; --soft: #86868B;
+  --accent: #0071E3; --accent-ink: #FFFFFF; --accent-text: #0071E3; --link: #0066CC;
+  --chip: #E8E8ED; --chip-ink: #424245;
+  --hairline: rgba(0,0,0,.16);
+  --side: #FAFAFC; --side-hover: #E8E8ED;
+  --pill: rgba(210,210,215,.64); --dot: rgba(0,0,0,.42); --dot-on: rgba(0,0,0,.8);
+}
+/* 애플 다크: 다크 위 파랑은 #2997FF */
+:root[data-theme="dark"] {
+  --bg: #000000; --bg-alt: #161617;
+  --tile: #1D1D1F; --tile-alt: #161617;
+  --ink: #F5F5F7; --muted: rgba(255,255,255,.56); --soft: rgba(255,255,255,.48);
+  --accent: #2997FF; --accent-ink: #FFFFFF; --accent-text: #2997FF; --link: #2997FF;
+  --chip: #333336; --chip-ink: #D2D2D7;
+  --hairline: rgba(255,255,255,.16);
+  --side: #161617; --side-hover: #272729;
+  --pill: rgba(51,51,54,.72); --dot: rgba(255,255,255,.42); --dot-on: rgba(255,255,255,.85);
+}
+/* 애플이 아닌 브랜드는 사이드바·내비 색을 본 색에서 계산 */
+html:not([data-brand="apple"])[data-theme] {
+  --side: var(--bg-alt);
+  --side-hover: color-mix(in srgb, var(--ink) 8%, transparent);
+  --pill: color-mix(in srgb, var(--ink) 12%, transparent);
+  --dot: color-mix(in srgb, var(--ink) 40%, transparent);
+  --dot-on: var(--ink);
+}
+
+/* ── 배민: 민트 간판 카피, 꾸밈 거의 없음 ── */
+html[data-brand="baemin"] { --font: "Noto Sans KR", "Pretendard", sans-serif; --font-d: "Do Hyeon", "Do Hyeon Local", "Pretendard", sans-serif; --w-d: 400; --ls-d: -0.02em; --lh-d: 1.2; --r-tile: 24px; --r-btn: 999px; --r-chip: 999px; }
+html[data-brand="baemin"][data-theme="light"] { --bg: #F6F6F6; --bg-alt: #FFFFFF; --tile: #FFFFFF; --tile-alt: #F6F6F6; --ink: #222222; --muted: #7E8082; --soft: #B1B3B5; --accent: #0CEFD3; --accent-ink: #000000; --accent-text: #000000; --link: #222222; --chip: #000000; --chip-ink: #FFFFFF; --hairline: #E6E6E6; }
+html[data-brand="baemin"][data-theme="dark"] { --bg: #000000; --bg-alt: #111111; --tile: #1A1A1A; --tile-alt: #111111; --ink: #FFFFFF; --muted: #B1B3B5; --soft: #7E8082; --accent: #0CEFD3; --accent-ink: #000000; --accent-text: #0CEFD3; --link: #0CEFD3; --chip: #333333; --chip-ink: #FFFFFF; --hairline: #4D4D4D; }
+html[data-brand="baemin"][data-theme="light"] .accent { background: var(--accent); padding: 0 .12em; }
+
+/* ── 토스: 파랑은 행동에만, 둥근 앱 카드, 옅은 청회색 그림자 ── */
+html[data-brand="toss"] { --font: "Pretendard", sans-serif; --w-d: 700; --ls-d: -0.01em; --lh-d: 1.15; --r-tile: 44px; --r-btn: 16px; --r-chip: 999px; --shadow: 0 0 4px rgba(2,32,71,.05), 0 4px 16px rgba(2,32,71,.05); }
+html[data-brand="toss"][data-theme="light"] { --bg: #FFFFFF; --bg-alt: #F2F4F6; --tile: #F2F4F6; --tile-alt: #E8F3FF; --ink: #191F28; --muted: #4E5968; --soft: #8B95A1; --accent: #3182F6; --accent-ink: #FFFFFF; --accent-text: #3182F6; --link: #3182F6; --chip: #E8F3FF; --chip-ink: #1B64DA; --hairline: #E5E8EB; }
+html[data-brand="toss"][data-theme="dark"] { --bg: #202027; --bg-alt: #2C2C35; --tile: #2C2C35; --tile-alt: #202C4D; --ink: #FFFFFF; --muted: #C3C3C6; --soft: #9E9EA4; --accent: #3485FA; --accent-ink: #FFFFFF; --accent-text: #61B0FF; --link: #61B0FF; --chip: #23386A; --chip-ink: #8FCDFF; --hairline: #3C3C47; --shadow: none; }
+
+/* ── 당근: 하얀 생활 유틸리티에 주황 핀 하나, 그림자 없음 ── */
+html[data-brand="daangn"] { --font: "Pretendard", sans-serif; --w-d: 700; --ls-d: -0.01em; --lh-d: 1.2; --r-tile: 24px; --r-btn: 12px; --r-chip: 999px; }
+html[data-brand="daangn"][data-theme="light"] { --bg: #FFFFFF; --bg-alt: #F3F4F5; --tile: #F7F8F9; --tile-alt: #FFF2EC; --ink: #1A1C20; --muted: #555D6D; --soft: #868B94; --accent: #FF6600; --accent-ink: #FFFFFF; --accent-text: #FF6600; --link: #E14D00; --chip: #EEEFF1; --chip-ink: #1A1C20; --hairline: #DCDEE3; }
+html[data-brand="daangn"][data-theme="dark"] { --bg: #16171B; --bg-alt: #1D2025; --tile: #1D2025; --tile-alt: #2B2E35; --ink: #F3F4F5; --muted: #B0B3BA; --soft: #868B94; --accent: #FF6600; --accent-ink: #FFFFFF; --accent-text: #FF7A1F; --link: #FF9E65; --chip: #2B2E35; --chip-ink: #E9EAEC; --hairline: #393D46; }
+
+/* ── 카카오: 노랑은 버튼 하나에만, 자간 좁은 묵직한 헤드라인 ── */
+html[data-brand="kakaocorp"] { --font: "Pretendard", sans-serif; --w-d: 800; --ls-d: -0.033em; --lh-d: 1.18; --r-tile: 48px; --r-btn: 999px; --r-chip: 999px; --shadow: 4px 12px 40px 6px rgba(0,0,0,.09); }
+html[data-brand="kakaocorp"][data-theme="light"] { --bg: #FFFFFF; --bg-alt: #F9F9F9; --tile: #FFFFFF; --tile-alt: #F9F9F9; --ink: #333333; --muted: #666666; --soft: #888888; --accent: #FFCD00; --accent-ink: #000000; --accent-text: #000000; --link: #2439DF; --chip: #F2F2F2; --chip-ink: #333333; --hairline: #E5E5E5; }
+html[data-brand="kakaocorp"][data-theme="dark"] { --bg: #121212; --bg-alt: #1E1E1E; --tile: #2F2F2F; --tile-alt: #1E1E1E; --ink: #FFFFFF; --muted: #A1A1A1; --soft: #8E8E8E; --accent: #FEE500; --accent-ink: #000000; --accent-text: #FEE500; --link: #489FF8; --chip: #3A3A3A; --chip-ink: #FEE500; --hairline: #333333; --shadow: none; }
+html[data-brand="kakaocorp"][data-theme="light"] .accent { background: linear-gradient(transparent 58%, #FFCD00 58%); }
+html[data-brand="kakaocorp"][data-theme="light"] .btn { box-shadow: inset 0 0 0 2px #000; }
+
+/* ── 넷플릭스: 검은 극장, 빨간 버튼 하나, 각진 모서리 ── */
+html[data-brand="netflix"] { --font: "Noto Sans KR", sans-serif; --w-d: 900; --ls-d: -0.01em; --lh-d: 1.08; --r-tile: 4px; --r-btn: 8px; --r-chip: 4px; }
+html[data-brand="netflix"][data-theme="light"] { --bg: #F5F5F1; --bg-alt: #FFFFFF; --tile: #EAEAEA; --tile-alt: #DCDCDC; --ink: #141414; --muted: #4D4D4D; --soft: #808080; --accent: #E50914; --accent-ink: #FFFFFF; --accent-text: #E50914; --link: #B20710; --chip: #141414; --chip-ink: #FFFFFF; --hairline: #D2D2D2; }
+html[data-brand="netflix"][data-theme="dark"] { --bg: #000000; --bg-alt: #161616; --tile: #2D2D2D; --tile-alt: #161616; --ink: #FFFFFF; --muted: #B3B3B3; --soft: #808080; --accent: #E50914; --accent-ink: #FFFFFF; --accent-text: #FF3D47; --link: #FFFFFF; --chip: #414141; --chip-ink: #FFFFFF; --hairline: #232323; }
+html[data-brand="netflix"][data-theme="dark"] .slide { background: radial-gradient(ellipse 90% 70% at 75% 110%, #461518 0%, #210E17 45%, transparent 75%), radial-gradient(ellipse 70% 60% at 0% 0%, #192247 0%, transparent 60%), #000; }
+
+/* ── 스포티파이: 무광 검정 위 초록 하나, 굵은 타이틀 ── */
+html[data-brand="spotify"] { --font: "Pretendard", sans-serif; --w-d: 900; --ls-d: -0.02em; --lh-d: 1.05; --r-tile: 48px; --r-btn: 999px; --r-chip: 999px; }
+html[data-brand="spotify"][data-theme="light"] { --bg: #FFFFFF; --bg-alt: #F6F6F6; --tile: #F0F0F0; --tile-alt: #96F0B6; --ink: #000000; --muted: #6A6A6A; --soft: #919496; --accent: #1ED760; --accent-ink: #000000; --accent-text: #1ABC54; --link: #117A37; --chip: #000000; --chip-ink: #FFFFFF; --hairline: #E0E0E0; }
+html[data-brand="spotify"][data-theme="dark"] { --bg: #000000; --bg-alt: #121212; --tile: #1F1F1F; --tile-alt: #2A2A2A; --ink: #FFFFFF; --muted: #B3B3B3; --soft: #919496; --accent: #1ED760; --accent-ink: #000000; --accent-text: #1ED760; --link: #1ED760; --chip: #FFFFFF; --chip-ink: #000000; --hairline: #343434; }
+html[data-brand="spotify"] .btn { transition: transform .2s, background .2s; }
+html[data-brand="spotify"] .btn:hover { transform: scale(1.04); }
+
+/* ── 레고: 흰 베이스플레이트, 파랑 행동, 노랑 배지 ── */
+html[data-brand="lego"] { --font: "Noto Sans KR", sans-serif; --w-d: 900; --ls-d: 0em; --lh-d: 1.1; --r-tile: 32px; --r-btn: 999px; --r-chip: 999px; }
+html[data-brand="lego"][data-theme="light"] { --bg: #FFFFFF; --bg-alt: #F7F7F7; --tile: #F2F2F2; --tile-alt: #E5F2FF; --ink: #141414; --muted: #636363; --soft: #939393; --accent: #005AD2; --accent-ink: #FFFFFF; --accent-text: #005AD2; --link: #005AD2; --chip: #FFD502; --chip-ink: #000000; --hairline: #E5E5E5; }
+html[data-brand="lego"][data-theme="dark"] { --bg: #141414; --bg-alt: #242424; --tile: #22242D; --tile-alt: #011C58; --ink: #FFFFFF; --muted: #CBCBCB; --soft: #939393; --accent: #005AD2; --accent-ink: #FFFFFF; --accent-text: #0DADE4; --link: #0DADE4; --chip: #FFD502; --chip-ink: #000000; --hairline: #3D3D3D; }
+html[data-brand="lego"] .sc-chip { background: var(--chip); color: var(--chip-ink); border-radius: 14px; }
+
+/* ── 이솝: 크림 양피지, 사각 라벨, 세리프, 그림자 없음 ── */
+html[data-brand="aesop"] { --font: "IBM Plex Sans KR", sans-serif; --font-d: "Gowun Batang", serif; --w-d: 400; --ls-d: 0em; --lh-d: 1.25; --r-tile: 0px; --r-btn: 0px; --r-chip: 0px; }
+html[data-brand="aesop"][data-theme="light"] { --bg: #FFFEF2; --bg-alt: #EBEADE; --tile: #F6F5E8; --tile-alt: #EBEADE; --ink: #333333; --muted: #666666; --soft: #999999; --accent: #333333; --accent-ink: #FFFEF2; --accent-text: #CA432F; --link: #000000; --chip: #EBEADE; --chip-ink: #333333; --hairline: #D5D5CB; }
+html[data-brand="aesop"][data-theme="dark"] { --bg: #1F1D19; --bg-alt: #2A2722; --tile: #33302A; --tile-alt: #2A2722; --ink: #FFFEF2; --muted: #D5D5CB; --soft: #999999; --accent: #FFFEF2; --accent-ink: #333333; --accent-text: #E0775F; --link: #EBEADE; --chip: #3D3A33; --chip-ink: #FFFEF2; --hairline: #4A463E; }
+html[data-brand="aesop"] .btn { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px currentColor; }
+html[data-brand="aesop"] .btn::after { content: "→"; }
+html[data-brand="aesop"] .btn:hover { background: var(--tile-alt); }
+
+/* ── 포르쉐: 무채색 쇼룸, 빨강 없음 ── */
+html[data-brand="porsche"] { --font: "IBM Plex Sans KR", sans-serif; --w-d: 700; --ls-d: -0.01em; --lh-d: 1.15; --r-tile: 16px; --r-btn: 16px; --r-chip: 8px; }
+html[data-brand="porsche"][data-theme="light"] { --bg: #FFFFFF; --bg-alt: #EEEEEE; --tile: #EEEFF2; --tile-alt: #FFFFFF; --ink: #000000; --muted: #555555; --soft: #B0B0B6; --accent: #0E0E12; --accent-ink: #FFFFFF; --accent-text: #555555; --link: #000000; --chip: #FFFFFF; --chip-ink: #000000; --hairline: #D5D5DA; }
+html[data-brand="porsche"][data-theme="dark"] { --bg: #0E0E12; --bg-alt: #0E1418; --tile: #1A1A24; --tile-alt: #0E0E12; --ink: #FFFFFF; --muted: #9F9FA0; --soft: #555555; --accent: #FFFFFF; --accent-ink: #0E0E12; --accent-text: #9F9FA0; --link: #FFFFFF; --chip: #2E2E38; --chip-ink: #FFFFFF; --hairline: #2E2E38; }
+
+/* ── 맥킨지: 딥블루 매거진, 가는 세리프 헤드라인, 각진 카드 ── */
+html[data-brand="mckinsey"] { --font: "Noto Sans KR", sans-serif; --font-d: "Nanum Myeongjo", serif; --w-d: 400; --ls-d: -0.01em; --lh-d: 1.15; --r-tile: 0px; --r-btn: 0px; --r-chip: 0px; }
+html[data-brand="mckinsey"][data-theme="light"] { --bg: #FFFFFF; --bg-alt: #FAFAFA; --tile: #F0F0F0; --tile-alt: #FFFFFF; --ink: #000000; --muted: #757575; --soft: #B3B3B3; --accent: #2251FF; --accent-ink: #FFFFFF; --accent-text: #2251FF; --link: #2251FF; --chip: #FFFFFF; --chip-ink: #051C2C; --hairline: #D0D0D0; }
+html[data-brand="mckinsey"][data-theme="dark"] { --bg: #051C2C; --bg-alt: #031119; --tile: #082644; --tile-alt: #031119; --ink: #FFFFFF; --muted: #B3B3B3; --soft: #757575; --accent: #00A9F4; --accent-ink: #000000; --accent-text: #00A9F4; --link: #6E9DFF; --chip: #103559; --chip-ink: #FFFFFF; --hairline: #2B5580; }
+html[data-brand="mckinsey"] .sc-chip { background: none; color: var(--ink); padding: 8px 0; font-size: 24px; text-transform: uppercase; letter-spacing: .14em; }
+/* 세리프 브랜드는 따옴표도 제목 글꼴로 */
+html[data-brand="aesop"] .sc-q::before, html[data-brand="aesop"] .sc-q::after, html[data-brand="mckinsey"] .sc-q::before, html[data-brand="mckinsey"] .sc-q::after { font-family: var(--font-d); font-weight: 700; }
+/* 강조색이 밝은 다크 브랜드는 막대 '전' 색을 더 어둡게 */
+html[data-brand="aesop"][data-theme="dark"], html[data-brand="porsche"][data-theme="dark"] { --bar-pre: var(--soft); }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; }
+body { font-family: var(--font); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; transition: background .3s; }
+
+/* 목차 사이드바: Apple localnav처럼 작고 조용하게 */
+#side {
+  position: fixed; top: 0; left: 0; bottom: 0; width: var(--side-w);
+  background: var(--side); border-right: 1px solid var(--hairline);
+  display: flex; flex-direction: column; padding: 20px 12px; z-index: 20;
+  transition: transform .3s ease, background .3s;
+}
+body.no-side #side { transform: translateX(-100%); }
+.side-head { display: flex; align-items: center; justify-content: space-between; padding: 0 8px 16px; }
+.side-head b { font-size: 12px; font-weight: 600; color: var(--soft); letter-spacing: .02em; }
+#toc { list-style: none; margin: 0; padding: 0; flex: 1; overflow-y: auto; }
+#toc button {
+  width: 100%; display: flex; gap: 12px; align-items: baseline; text-align: left;
+  padding: 11px 12px; border: 0; border-radius: 10px; background: none; cursor: pointer;
+  font: 400 15px/1.35 var(--font); color: var(--muted);
+}
+#toc button:hover { background: var(--side-hover); }
+#toc button .n { font-size: 12px; color: var(--soft); width: 18px; flex: none; }
+#toc button.on { color: var(--ink); font-weight: 600; }
+#toc button.on .n { color: var(--accent-text); }
+/* 챕터 묶음: 지금 장이 있는 챕터만 펼친다 */
+#toc ol { list-style: none; margin: 0; padding: 0 0 6px 8px; display: none; }
+#toc .grp.open > ol { display: block; }
+#toc .gh { justify-content: space-between; align-items: center; font-weight: 600; color: var(--ink); }
+#toc .grp.open > .gh { color: var(--accent-text); }
+#toc .gc { font-size: 12px; font-weight: 400; color: var(--soft); }.icon-btn {
+  width: 32px; height: 32px; border: 0; border-radius: 999px; background: var(--pill);
+  color: var(--ink); cursor: pointer; font-size: 15px; line-height: 1; display: grid; place-items: center;
+}
+#theme { margin: 12px 8px 4px; display: flex; background: var(--pill); border-radius: 999px; padding: 3px; }
+#theme button { flex: 1; border: 0; border-radius: 999px; padding: 8px 0; background: none; cursor: pointer; font: 400 13px/1 var(--font); color: var(--muted); }
+#theme button.on { background: var(--bg); color: var(--ink); font-weight: 600; }
+#brand { margin: 10px 8px 0; display: flex; flex-wrap: wrap; gap: 5px; }
+#brand button { border: 0; border-radius: 999px; padding: 7px 10px; background: var(--pill); cursor: pointer; font: 400 12px/1 var(--font); color: var(--muted); }
+#brand button.on { background: var(--ink); color: var(--bg); font-weight: 600; }
+.keys { margin: 10px 8px 0; font-size: 11px; color: var(--soft); line-height: 1.6; }
+#open-side { position: fixed; top: 16px; left: 16px; z-index: 15; opacity: 0; pointer-events: none; transition: opacity .3s; }
+body.no-side #open-side { opacity: 1; pointer-events: auto; }
+
+/* 브랜드를 바꾸면 위에 이름이 잠깐 뜬다 */
+#toast {
+  position: fixed; top: 24px; left: calc(50% + var(--side-w) / 2); transform: translateX(-50%);
+  padding: 10px 22px; border-radius: 999px; background: var(--ink); color: var(--bg);
+  font: 600 15px/1 var(--font); z-index: 30; opacity: 0; pointer-events: none; transition: opacity .3s, left .3s;
+}
+#toast.show { opacity: 1; }
+body.no-side #toast { left: 50%; }
+
+/* 무대: 사이드바 오른쪽 영역에 맞춰 scale */
+#view { position: fixed; top: 0; right: 0; bottom: 0; left: var(--side-w); transition: left .3s ease; }
+body.no-side #view { left: 0; }
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: center; }
+.slide {
+  position: absolute; inset: 0; background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 120px 160px;
+  opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility .5s, background .3s;
+}
+.slide.on { opacity: 1; visibility: visible; }
+.accent { color: var(--accent-text); }
+
+/* ════ 성찰회 배치 (sc-) ════
+   한 장에 하나. 왼쪽 위 같은 자리에 칩 + 큰 제목, 그 아래 본문 영역(y 300~970).
+   <section class="slide sc 패턴"> <div class="sc-head"><span class="sc-chip">CHAPTER 01</span><h2 class="sc-title">제목</h2></div> <div class="sc-body">…</div> </section> */
+.slide.sc { display: block; padding: 0; text-align: left; }
+.sc-head { position: absolute; left: 88px; top: 60px; width: 1744px; height: 210px; z-index: 3; pointer-events: none; }
+.sc-chip { display: inline-block; padding: 8px 26px; border-radius: var(--r-chip); background: var(--accent); color: var(--accent-ink); font: 700 28px/1.2 var(--font); letter-spacing: .04em; }
+.sc-title {
+  position: absolute; left: 0; top: 90px; margin: 0; max-width: 1744px;
+  font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 100px; line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* 본문: 아래 110px은 점 내비 자리 */
+.sc-body { position: absolute; top: 300px; bottom: 110px; left: 88px; right: 88px; z-index: 1; display: flex; align-items: center; justify-content: center; }
+
+/* 그림: 그림자·모서리·테두리 없음. 기본은 영역 안에 다 보이게(contain)
+   img.crop → 채워 자르기(object-position은 인라인) · img.ink → 흑백 선 그림, 다크에서 뒤집기 · img.plate → 밝은 배경이 붙은 그림, 다크에서 연한 판 위에 */
+figure.sc-fig { margin: 0; position: relative; min-width: 0; min-height: 0; display: flex; align-items: center; justify-content: center; }
+figure.sc-fig > img { display: block; width: 100%; height: 100%; object-fit: contain; }
+figure.sc-fig > img.crop { object-fit: cover; }
+html[data-theme="dark"] .sc-fig > img.ink { filter: invert(1); }
+html[data-theme="dark"] .sc-fig > img.plate { width: auto; height: auto; max-width: 100%; max-height: 100%; background: #F2F2F2; border-radius: calc(var(--r-tile) / 2); padding: 24px; }
+/* 그림 설명: <figure class="sc-fig"><img></figure> */
+figure.sc-fig:has(> figcaption) { flex-direction: column; }
+figure.sc-fig:has(> figcaption) > img { height: auto; flex: 1 1 0; min-height: 0; }
+.sc-fig > figcaption { flex: none; margin-top: 16px; font: 400 30px/1.3 var(--font); color: var(--muted); text-align: center; }
+/* 출처·주석 한 줄: 막대·표·카드 장의 .sc-body 맨 끝에 <p class="sc-note"> */
+.sc-body:has(> .sc-note) { flex-direction: column; gap: 16px; }
+.sc-note { margin: 0; align-self: stretch; font: 400 24px/1.4 var(--font); color: var(--muted); text-align: left; }
+
+/* 1. 표지: 왼쪽 글, 오른쪽 강조색 원, 아래 메타 3칸 */
+.sc-cover-main { position: absolute; left: 132px; right: 100px; top: 200px; height: 560px; display: flex; align-items: center; justify-content: space-between; gap: 60px; }
+.sc-cover-text { min-width: 0; word-break: keep-all; }
+.sc-kicker { display: inline-block; margin: 0 0 36px; transform: rotate(-4deg); transform-origin: left bottom; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 78px; line-height: 1.2; }
+.sc-big { margin: 0; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 118px; line-height: 1.25; }
+.sc-sub { margin: 28px 0 0; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 60px; line-height: 1.3; color: var(--ink); }
+.sc-dot { flex: none; width: 560px; height: 560px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 150px; line-height: 1; }
+.sc-meta { position: absolute; left: 132px; bottom: 160px; display: flex; gap: 64px; margin: 0; padding: 0; list-style: none; }
+.sc-meta li { display: flex; align-items: center; gap: 18px; font: 700 26px/1.3 var(--font); white-space: nowrap; }
+.sc-meta svg { width: 56px; height: 56px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* 2. 그림 1장: 본문 영역 안에서 최대 */
+.sc-pic .sc-fig { width: 100%; height: 100%; }
+
+/* 3. 그림 2장(이상): 위아래 선 맞춤. 그림마다 style="--ar:가로/세로" (기본 4/3) */
+.sc-pic2 .sc-body { gap: 48px; }
+.sc-pic2 .sc-fig { flex: var(--ar, 1.3333) 1 0; aspect-ratio: var(--ar, 1.3333); max-height: 100%; }
+
+/* 4. 전면 그림: 무대 전체. 머리 없이는 section에 sc-nohead를 붙이고 sc-head를 뺀다 */
+.sc-full > .sc-fig { position: absolute; inset: 0; z-index: 0; }
+.sc-full > .sc-fig > img { object-fit: cover; }
+.sc-full:not(.sc-nohead) > .sc-fig::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 420px; background: linear-gradient(color-mix(in srgb, var(--bg) 82%, transparent), transparent); }
+
+/* 5. 인용: 따옴표는 글 상자 기준이라 줄 수가 바뀌어도 균형 유지 */
+.sc-q { position: relative; margin: 0; max-width: 1240px; text-align: center; word-break: keep-all; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 100px; line-height: 1.3; }
+.sc-q::before, .sc-q::after { position: absolute; color: var(--accent); font: 900 220px/1 "Noto Sans KR", var(--font); letter-spacing: 0; }
+.sc-q::before { content: "\201C"; right: 100%; margin-right: 48px; top: -36px; }
+.sc-q::after { content: "\201D"; left: 100%; margin-left: 48px; bottom: -100px; }
+
+/* 6. 키워드 3열 */
+.sc-cols3 .sc-body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; align-items: center; }
+.sc-cols3 .sc-body > * { margin: 0; text-align: center; word-break: keep-all; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 100px; line-height: 1.2; }
+.sc-cols3 .sc-body small { display: block; margin-top: 20px; font: 400 36px/1.4 var(--font); letter-spacing: 0; color: var(--muted); }
+
+/* 7. 대비: 큰 문장 한 줄 + 아래 2열 단어와 가운데 화살표 */
+.sc-versus .sc-body { flex-direction: column; gap: 72px; }
+.sc-vs-line { margin: 0; white-space: nowrap; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 150px; line-height: 1.2; }
+.sc-vs-rows { display: grid; grid-template-columns: 1fr auto 1fr; column-gap: 72px; row-gap: 24px; align-items: center; width: 100%; max-width: 1400px; }
+.sc-vs-rows > * { margin: 0; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 80px; line-height: 1.2; white-space: nowrap; }
+.sc-vs-rows > :nth-child(3n+1) { text-align: right; color: var(--muted); }
+.sc-vs-rows > :nth-child(3n) { text-align: left; }
+.sc-arrow { color: var(--accent-text); }
+
+/* 8. 그림 + 이름·값 */
+.sc-kv .sc-body { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: center; }
+.sc-kv .sc-fig { height: 100%; }
+.sc-dl { display: grid; grid-template-columns: auto 1fr; column-gap: 64px; row-gap: 28px; margin: 0; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 80px; line-height: 1.25; }
+.sc-dl dt { color: var(--muted); }
+.sc-dl dt { white-space: nowrap; }
+.sc-dl dd { margin: 0; word-break: keep-all; }
+
+/* 9. 막대: 값 style="--v:3.9", 최대 --max(기본 5)는 section이나 .sc-chart에 */
+.sc-bars .sc-body { flex-direction: column; align-items: stretch; gap: 16px; }
+.sc-legend { display: flex; justify-content: flex-end; gap: 40px; margin: 0; font: 400 28px/1.2 var(--font); color: var(--muted); }
+.sc-legend i { display: inline-block; width: 24px; height: 24px; margin-right: 12px; border-radius: 6px; vertical-align: -3px; background: var(--accent); }
+.sc-legend i.pre { background: var(--bar-pre, var(--muted)); }
+.sc-chart { flex: 1; min-height: 0; display: flex; justify-content: center; gap: 64px; }
+.sc-item { flex: 1; max-width: 460px; min-height: 0; display: flex; flex-direction: column; align-items: center; }
+.sc-pair { flex: 1; min-height: 0; width: 100%; padding-top: 56px; display: flex; justify-content: center; align-items: flex-end; gap: 24px; border-bottom: 2px solid var(--hairline); }
+.sc-bar { position: relative; width: 120px; height: calc(var(--v) / var(--max, 5) * 100%); border-radius: calc(var(--r-tile) / 4) calc(var(--r-tile) / 4) 0 0; background: var(--accent); }
+.sc-bar.pre { background: var(--bar-pre, var(--muted)); }
+.sc-bar > span { position: absolute; left: 50%; bottom: 100%; transform: translateX(-50%); padding-bottom: 10px; font: 700 36px/1 var(--font); color: var(--ink); white-space: nowrap; }
+.sc-name { margin: 20px 0 0; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 44px; line-height: 1.2; white-space: nowrap; }
+.sc-delta { margin: 6px 0 0; font: 700 32px/1.2 var(--font); color: var(--accent-text); }
+
+/* 10. 쌓기: 아무 장에서나 [data-step]은 다음 키를 누를 때마다 하나씩 보인다 */
+.slide [data-step] { opacity: 0; transition: opacity .4s ease; }
+.slide [data-step].shown { opacity: 1; }
+
+/* ── 남긴 틀: 목록 카드 · 표 · 실습 (sc-body 안에 넣는다) ── */
+.tile { background: var(--tile); border-radius: var(--r-tile); box-shadow: var(--shadow); padding: 64px 56px; text-align: left; transition: background .3s; }
+.tile h3 { font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 56px; margin: 0 0 8px; }
+.tile .cap { font-size: 30px; color: var(--muted); margin: 0 0 48px; }
+.chip { font-size: 30px; padding: 14px 24px; border-radius: var(--r-chip); background: var(--chip); color: var(--chip-ink); white-space: nowrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  min-height: 80px; padding: 20px 44px; border: 0; border-radius: var(--r-btn);
+  background: var(--accent); color: var(--accent-ink); font: 400 32px/1.17 var(--font); cursor: pointer; transition: background .2s, filter .2s;
+}
+.btn:hover { filter: brightness(1.08); }
+
+/* 목록 카드 3장 (find-place 결과 같은 순위·후보) */
+.cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; width: 100%; }
+.cards3 .tile { padding: 52px 48px; }
+.cards3 .rank { font-size: 28px; font-weight: 600; color: var(--accent-text); margin: 0 0 20px; }
+.cards3 .cap { margin: 0 0 28px; }
+.cards3 .meta { font-size: 26px; line-height: 1.5; color: var(--muted); margin: 0; }
+.cards3 a, .table a, .sc-src a { color: var(--link); text-decoration: none; }
+
+/* 표 */
+.table { width: 100%; border-collapse: collapse; font-size: 32px; text-align: left; }
+.table th { font-size: 26px; font-weight: 600; color: var(--muted); padding: 0 28px 20px; border-bottom: 2px solid var(--hairline); }
+.table td { padding: 28px; border-bottom: 1px solid var(--hairline); }
+.table tr.pick td { background: var(--tile); font-weight: 600; }
+.table tr.pick td:first-child { color: var(--accent-text); }
+/* 성찰회 배치(큰 제목) 안에서는 카드·표 글씨를 키운다 */
+.sc .cards3 .tile { padding: 60px 56px; }
+.sc .cards3 h3 { font-size: 72px; }
+.sc .cards3 .cap { font-size: 40px; }
+.sc .cards3 .rank { font-size: 40px; }
+.sc .cards3 .meta { font-size: 32px; }
+.sc .table { font-size: 44px; }
+.sc .table th { font-size: 32px; }
+
+/* 실습: 다운로드 + 프롬프트 복사 */
+.lab { display: grid; grid-template-columns: 1fr 1.25fr; gap: 32px; width: 100%; text-align: left; align-items: stretch; }
+.lab .tile.files { background: var(--tile); }
+.lab .tile.copy { border: 1px solid var(--hairline); }
+.file { display: flex; align-items: center; gap: 28px; padding: 28px 0; border-top: 1px solid var(--hairline); text-decoration: none; color: var(--ink); }
+.file:first-of-type { border-top: 0; }
+.file .ext { width: 88px; height: 88px; border-radius: calc(var(--r-tile) * .6); background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-size: 26px; font-weight: 600; flex: none; }
+.file .name { font-size: 32px; font-weight: 600; line-height: 1.3; }
+.file .sub { font-size: 24px; color: var(--link); }
+div.file .sub { color: var(--muted); }
+.prompt { font-family: var(--font); background: var(--tile-alt); border-radius: calc(var(--r-tile) * .67); padding: 40px 44px; font-size: 32px; line-height: 1.55; color: var(--ink); margin: 0 0 36px; white-space: pre-wrap; }
+.copied { font-size: 26px; color: #03A10E; margin-left: 20px; opacity: 0; transition: opacity .3s; }
+.copied.show { opacity: 1; }
+
+/* 아래 점 내비 */
+#nav { position: fixed; bottom: 28px; left: calc(50% + var(--side-w) / 2); transform: translateX(-50%); display: flex; gap: 14px; padding: 14px 20px; border-radius: 999px; background: var(--pill); backdrop-filter: blur(20px); z-index: 10; transition: left .3s ease; }
+body.no-side #nav { left: 50%; }
+#nav button { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 999px; background: var(--dot); cursor: pointer; transition: width .3s, background .3s; }
+#nav button.on { width: 36px; background: var(--dot-on); }
+/* 열 때는 전환 애니메이션 없이 (목차 닫힌 채 열 때 무대가 작게 잡히던 문제) */
+html.preload *, html.preload *::before, html.preload *::after { transition: none !important; }
+
+/* 이 덱에서 보탠 것: 자료 빈칸 · 번호 목록 · QR 카드 · 표지 그림 · 픽토그램 */
+.sc-cover-pic { flex: none; width: 560px; height: 560px; object-fit: contain; }
+.sc-pict { display: block; margin-bottom: 28px; font-size: 200px; line-height: 1.1; }
+.tool-logo { display: block; width: 180px; height: 180px; margin: 0 auto 36px; }
+.pict-big .sc-pict svg { width: 380px !important; height: 380px !important; }
+.sc-pict svg { display: block; width: 200px; height: 200px; margin: 0 auto; fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.sc-todo { width: 100%; height: 100%; border: 4px dashed var(--muted); border-radius: var(--r-tile); display: grid; place-items: center; font: 700 56px/1.3 var(--font); color: var(--muted); text-align: center; }
+.sc-list { margin: 0; padding: 0; list-style: none; counter-reset: n; display: flex; flex-direction: column; gap: 40px; width: 100%; max-width: 1500px; }
+.sc-list li { counter-increment: n; display: flex; align-items: center; gap: 44px; word-break: keep-all; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 68px; line-height: 1.25; }
+.sc-list li::before { content: counter(n); flex: none; width: 104px; height: 104px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-size: 56px; }
+.sc-body:has(> .sc-list) { flex-direction: column; gap: 40px; }
+.sc-src { margin: 8px 0 0; width: 100%; max-width: 1500px; padding: 18px 28px; border-left: 10px solid var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); font: 700 34px/1.35 var(--font); word-break: keep-all; }
+.sc-qr .tile { text-align: center; }
+.sc-qr .tile img { display: block; width: 300px; height: 300px; margin: 0 auto 36px; background: #fff; border-radius: 16px; }
+/* 아래에 자료 모음 링크 줄이 있어 QR을 줄인다 */
+section[data-title="직접 해 보기"] .sc-qr .tile img { width: 230px; height: 230px; margin-bottom: 20px; }
+section[data-title="직접 해 보기"] .sc-qr .tile { padding-top: 32px; padding-bottom: 32px; }
+/* 영상 장: figure.sc-fig > video (화면 클릭 넘김과 안 겹치게 data-noclick) */
+figure.sc-fig > video { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* 3분할 가운데 그림 칸 */
+.sc-cols3 .sc-body > .cols3-fig { height: 640px; font-size: 0; }
+.sc-cols3 .sc-body > .cols3-fig > figcaption { margin-top: 28px; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 100px; line-height: 1.2; color: var(--ink); }
+/* 3단계 흐름 + 되돌아가는 고리 (DINO) */
+.flow3 { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; grid-template-rows: auto 90px; align-items: center; column-gap: 28px; width: 100%; }
+.flow3 .st { padding: 44px 24px; border: 4px solid var(--ink); border-radius: var(--r-tile); text-align: center; word-break: keep-all; }
+.flow3 .st.key { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.flow3 .who { display: inline-block; margin-bottom: 18px; padding: 6px 22px; border-radius: var(--r-chip); background: var(--ink); color: var(--bg); font: 700 28px/1.2 var(--font); }
+.flow3 b { display: block; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 64px; line-height: 1.2; }
+.flow3 small { display: block; margin-top: 14px; font: 400 30px/1.35 var(--font); opacity: .75; }
+.flow3 .ar { font-family: var(--font-d); font-size: 80px; line-height: 1; }
+.flow3 .loop { grid-column: 3 / 6; grid-row: 2; align-self: stretch; margin: 0 15%; border: 6px solid var(--ink); border-top: 0; border-radius: 0 0 40px 40px; position: relative; }
+.flow3 .loop::before { content: ""; position: absolute; left: -17px; top: -6px; border: 14px solid transparent; border-bottom: 22px solid var(--ink); border-top: 0; }
+.flow3 .loop span { position: absolute; left: 50%; bottom: -26px; transform: translateX(-50%); padding: 0 20px; background: var(--bg); font: 700 36px/1.4 var(--font); white-space: nowrap; }
+/* 활동지 조각 2×2 */
+.sc-body.ws-grid { display: grid; grid-template-columns: 1fr 1fr; align-content: center; gap: 40px; }
+.ws-grid .sc-fig { width: 100%; aspect-ratio: 1012 / 245; }
+/* 로저 만화 장: 빈 말풍선 위에 대사, 눈 위에 로고 (좌표는 그림 기준 %) */
+.manga { position: relative; height: 100%; aspect-ratio: 283 / 301; max-width: 100%; }
+.manga > img { display: block; width: 100%; height: 100%; }
+.mg-t { position: absolute; margin: 0; display: flex; align-items: center; justify-content: center; text-align: center; word-break: keep-all; font-family: var(--font-d); font-weight: var(--w-d); font-size: 34px; line-height: 1.15; color: #111; }
+.mg-t b { color: #C8102E; font-weight: inherit; }
+.mg-logo { position: absolute; width: 11%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 0 0 4px #111; }
+.mg-logo img { width: 66%; height: 66%; }
+.mg-logo + .mg-logo img { filter: invert(52%) sepia(52%) saturate(700%) hue-rotate(335deg) brightness(95%); }
+.mg-logo.nof img { filter: none; }
+/* 에듀테크가 죽어 간다: 넘기면 큰 글자가 회색으로 바래고 줄이 그어진다 */
+.dying-word { margin: 0; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 300px; line-height: 1.2; color: var(--accent-text); transition: color .8s, opacity .8s; text-decoration: line-through transparent; text-decoration-thickness: 20px; }
+.sc-dying:has(.dying-step.shown) .dying-word { color: var(--muted); opacity: .4; text-decoration-color: var(--muted); }
+.sc-dying .dying-step { position: absolute; width: 0; height: 0; }
+/* 기사 제목 캡처 2개 나란히 */
+.news-row { display: flex; gap: 48px; width: 100%; align-items: flex-start; }
+.news-row .sc-fig { flex: 1 1 0; min-width: 0; }
+.news-row .sc-fig > img { flex: none; width: 100%; height: auto; background: #fff; border-radius: 16px; padding: 12px; box-sizing: border-box; }
+.tool-logo { object-fit: contain; }
+/* SE4A: 개발 과정 장 · 생각해 볼 점 세 칸 */
+.stack-dl { font-size: 60px; row-gap: 26px; column-gap: 72px; width: 100%; max-width: 1500px; align-items: baseline; }
+.stack-dl dd { margin: 0; word-break: keep-all; }
+.stack-dl small { font: 400 34px/1.3 var(--font); letter-spacing: 0; color: var(--muted); margin-left: 6px; }
+.think3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; width: 100%; }
+.think3 .tile { text-align: center; word-break: keep-all; padding: 48px 32px; }
+.think3 h3 { margin: 0 0 32px; font: 700 40px/1.3 var(--font); color: var(--muted); }
+.think3 p { margin: 0; font-family: var(--font-d); font-weight: var(--w-d); letter-spacing: var(--ls-d); font-size: 64px; line-height: 1.25; }
+</style>
+</head>
+<body>
+
+<aside id="side">
+  <div class="side-head">
+    <b>목차</b>
+    <button class="icon-btn" id="close-side" title="목차 숨기기 (T)">‹</button>
+  </div>
+  <ol id="toc"></ol>
+  <div id="theme">
+    <button data-theme="light">☀ 낮</button>
+    <button data-theme="dark">☾ 다크</button>
+  </div>
+  <div id="brand"></div>
+  <p class="keys">← → 넘기기 · T 목차 · D 모드 · M 테마 · F 전체 화면</p>
+</aside>
+<button class="icon-btn" id="open-side" title="목차 열기 (T)">☰</button>
+<div id="toast"></div>
+
+<div id="view"><div id="stage">
+
+  <!-- ════ 도입 ════ -->
+  <section class="slide sc sc-cover" data-title="표지">
+    <div class="sc-cover-main">
+      <div class="sc-cover-text">
+        <p class="sc-kicker">2026 교간형 전학공 연합학술제</p>
+        <h1 class="sc-big">생성형 AI를 활용한<br><span class="accent">교육 자료 개발</span></h1>
+      </div>
+      <img class="sc-cover-pic" src="img/dino-cover.png" alt="디노">
+    </div>
+    <ul class="sc-meta">
+      <li><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>인천효성남초</li>
+      <li><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>양상경</li>
+      <li><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>2026. 10. 30</li>
+    </ul>
+  </section>
+
+  <section class="slide sc sc-pic" data-title="대AI웹앱 시대">
+    <div class="sc-head"><span class="sc-chip">도입</span><h2 class="sc-title">대<span class="accent">AI웹앱</span> 시대 개막</h2></div>
+    <div class="sc-body"><figure class="sc-fig"><div class="manga">
+      <img src="img/onepiece-manga.png" alt="원피스 1화 처형대 위 골 D. 로저 (패러디)">
+      <p class="mg-t" style="left:49.5%;top:1.7%;width:10.8%;height:15.5%;font-size:19px"><span>부,<br>명성,<br>웹앱.</span></p>
+      <p class="mg-t" style="left:66%;top:2%;width:32%;height:20%"><span>수업 자료<br>말이냐?</span></p>
+      <p class="mg-t" style="left:66%;top:69%;width:32%;height:25%"><span>원한다면<br>만들어<br>봐라!</span></p>
+      <p class="mg-t" style="left:2.5%;top:67%;width:26%;height:27%"><span>세상은<br>바야흐로<br><b>대 웹앱<br>시대!</b></span></p>
+      <span class="mg-logo" style="left:70.5%;top:39.5%"><img src="img/logo-openai.svg" alt="ChatGPT"></span>
+      <span class="mg-logo" style="left:84.5%;top:39.5%"><img src="img/logo-claude.svg" alt="Claude"></span>
+    </div></figure></div>
+  </section>
+
+  <section class="slide sc sc-pic2" data-title="쏟아지는 웹앱 자료">
+    <div class="sc-head"><span class="sc-chip">도입</span><h2 class="sc-title">웹앱 수업 자료가 쏟아진다</h2></div>
+    <div class="sc-body">
+      <figure class="sc-fig" style="--ar:1400/992"><img src="img/indi-1.jpg" alt="인디스쿨 웹앱 검색 결과 1"></figure>
+      <figure class="sc-fig" style="--ar:1400/992"><img src="img/indi-2.jpg" alt="인디스쿨 웹앱 검색 결과 2"></figure>
+    </div>
+  </section>
+
+  <section class="slide sc sc-pic2" data-title="독도 계기교육">
+    <div class="sc-head"><span class="sc-chip">도입</span><h2 class="sc-title">독도 계기교육에서 쓴 웹앱</h2></div>
+    <div class="sc-body">
+      <figure class="sc-fig" style="--ar:16/9"><img src="img/dokdo-1.jpg" alt="Dokdo-day"></figure>
+      <figure class="sc-fig" style="--ar:16/9"><img src="img/dokdo-2.jpg" alt="수달용사 독도의 기억"></figure>
+      <figure class="sc-fig" style="--ar:16/9"><img src="img/dokdo-3.jpg" alt="독도 원정대"></figure>
+    </div>
+  </section>
+
+  <section class="slide sc sc-versus" data-title="자료의 형태">
+    <div class="sc-head"><span class="sc-chip">도입</span><h2 class="sc-title">교육 자료의 형태가 넓어진다</h2></div>
+    <div class="sc-body">
+      <p class="sc-vs-line">학습지·PPT <span class="accent">→</span> 웹앱</p>
+      <div class="sc-vs-rows"><p>지금도</p><span class="sc-arrow">→</span><p>더 빨라진다</p></div>
+    </div>
+  </section>
+
+  <section class="slide sc sc-pic" data-title="AI로 만든 활동지">
+    <div class="sc-head"><span class="sc-chip">도입</span><h2 class="sc-title">ChatGPT로 만든 활동지</h2></div>
+    <div class="sc-body ws-grid">
+      <figure class="sc-fig"><img src="img/trace-ws-1.jpg" alt="활동지 TRACE 01"></figure>
+      <figure class="sc-fig"><img src="img/trace-ws-2.jpg" alt="활동지 TRACE 02"></figure>
+      <figure class="sc-fig"><img src="img/trace-ws-3.jpg" alt="활동지 TRACE 03"></figure>
+      <figure class="sc-fig"><img src="img/trace-ws-4.jpg" alt="활동지 TRACE 04"></figure>
+    </div>
+  </section>
+
+
+
+  <!-- ════ 사례 ① 기후 탐사대 ════ -->
+  <section class="slide sc sc-pic" data-title="① 기후 탐사대">
+    <div class="sc-head"><span class="sc-chip">① 기후 탐사대</span><h2 class="sc-title">서·논술형 평가 웹앱</h2></div>
+    <div class="sc-body"><figure class="sc-fig"><video src="img/climate-motion.mp4" poster="img/climate-app.jpg" controls playsinline preload="auto" data-noclick></video></figure></div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="연수 과제">
+    <div class="sc-head"><span class="sc-chip">① 기후 탐사대 · 동기</span><h2 class="sc-title">연수 과제</h2></div>
+    <div class="sc-body"><blockquote class="sc-q">시작은<br>서·논술형 평가 연수 과제</blockquote></div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="형식의 벽">
+    <div class="sc-head"><span class="sc-chip">① 기후 탐사대 · 동기</span><h2 class="sc-title">형식의 벽</h2></div>
+    <div class="sc-body"><blockquote class="sc-q">훈련받지 못한 아이는<br>형식부터 거부감</blockquote></div>
+  </section>
+
+  <section class="slide sc sc-cols3" data-title="이야기·게임화">
+    <div class="sc-head"><span class="sc-chip">① 기후 탐사대 · 제작</span><h2 class="sc-title">이야기·게임화</h2></div>
+    <div class="sc-body" style="grid-template-columns:repeat(2,1fr)">
+      <figure class="sc-fig cols3-fig"><img src="img/climate-dialog.jpg" alt="숲의 정령 무이가 말을 거는 대사 장면"><figcaption>이야기</figcaption></figure>
+      <figure class="sc-fig cols3-fig"><img src="img/climate-spirits.jpg" alt="모으는 정령 세 마리"><figcaption>게임화</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="slide sc sc-pic" data-title="문항 설계">
+    <div class="sc-head"><span class="sc-chip">① 기후 탐사대 · 제작</span><h2 class="sc-title">문항 설계</h2></div>
+    <div class="sc-body"><figure class="sc-fig"><img class="plate" src="img/climate-items.jpg" alt="자료 1과 반응지시어로 짠 문항 1~3"></figure></div>
+  </section>
+
+  <section class="slide sc sc-cols3" data-title="제작 도구">
+    <div class="sc-head"><span class="sc-chip">① 기후 탐사대 · 제작</span><h2 class="sc-title">제작 도구</h2></div>
+    <div class="sc-body">
+      <p><svg class="tool-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="var(--ink)" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>GPT<small>에셋 제작</small></p>
+      <p><svg class="tool-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#D97757" d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg>Claude<small>웹앱 제작</small></p>
+      <p><svg class="tool-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M12.363 2.54a3.136 3.136 0 0 0-.376.022 2.864 2.864 0 0 0-1.589.828c-.562.58-.82 1.115-.773 1.943-.01.264.193 1.023.272 1.274 1.115 3.546 2.09 6.75 3.26 10.279.08.246.168.486.267.72.02.047.035.046.048-.004.077-.297.174-.612.29-.945.894-2.576 1.772-5.14 2.633-7.696a.345.345 0 0 0 .004-.217 163.054 163.054 0 0 0-1.49-4.572 2.603 2.603 0 0 0-.704-.933c-.55-.46-1.166-.694-1.842-.7Zm9.078.117a2.734 2.734 0 0 0-2.878 1.828l-4.576 13.289a2.734 2.734 0 0 0 1.695 3.475l.12.04a2.734 2.734 0 0 0 3.475-1.694L23.85 6.307a2.734 2.734 0 0 0-1.695-3.476c-.233-.1-.506-.124-.716-.174ZM12.375 3.96a1.396 1.396 0 1 1 0 2.791 1.395 1.395 0 0 1 0-2.79zm8.809.07a1.402 1.402 0 1 1 0 2.803 1.402 1.402 0 0 1 0-2.803zM5.419 7.605a2.853 2.853 0 0 0-.468.052 2.683 2.683 0 0 0-1.337.627 2.62 2.62 0 0 0-.924 1.833 3.808 3.808 0 0 0 0 .648 2.52 2.52 0 0 0 .673 1.52c.221.238.465.454.732.648 3.043 2.21 6.08 4.43 9.108 6.664a.78.78 0 0 0 .158.089c.03-.043.032-.098.007-.167a17.409 17.409 0 0 0-.317-1.066 532.752 532.752 0 0 1-2.02-6.251 41.91 41.91 0 0 0-.497-1.477c-.967-.849-2.078-1.6-3.023-2.302A3.848 3.848 0 0 0 6.153 7.7a2.388 2.388 0 0 0-.734-.094Zm.02 1.424a1.398 1.398 0 1 1 0 2.796 1.398 1.398 0 0 1 0-2.796zm-2.458 6.792c-.733-.006-1.375.202-1.927.622a2.72 2.72 0 0 0-.95 1.45 2.78 2.78 0 0 0-.09 1.04 2.74 2.74 0 0 0 .695 1.583c.664.578 1.26.85 2 .945 1.42-.005 2.84-.012 4.262-.02h.418c2.277-.003 4.513-.002 6.706.003.148.005.28.003.392-.01.06-.005.091-.031.092-.077a10.656 10.656 0 0 0-.834-.653 488.746 488.746 0 0 1-6.57-4.815.236.236 0 0 0-.14-.047c-1.34-.003-2.691-.01-4.054-.02zm-.19 1.418a1.402 1.402 0 1 1 0 2.803 1.402 1.402 0 0 1 0-2.803zm13.874.002a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8z"/></svg>앱스 스크립트<small>시트 연결</small></p>
+    </div>
+  </section>
+
+  <section class="slide sc" data-title="개발 과정 (기후 탐사대)">
+    <div class="sc-head"><span class="sc-chip">① 기후 탐사대 · 제작</span><h2 class="sc-title">개발 과정</h2></div>
+    <div class="sc-body"><dl class="sc-dl stack-dl">
+        <dt>화면</dt><dd>구글 앱스 스크립트 웹앱</dd>
+        <dt>데이터</dt><dd>구글 시트 <small>학생 응답 저장</small></dd>
+        <dt>배포</dt><dd>앱스 스크립트 웹앱 배포</dd>
+        <dt>만든 도구</dt><dd>GPT <small>에셋</small> · Claude <small>웹앱</small></dd>
+    </dl></div>
+  </section>
+
+  <section class="slide sc sc-cols3" data-title="학생 응답">
+    <div class="sc-head"><span class="sc-chip">① 기후 탐사대 · 수업</span><h2 class="sc-title">학생 응답</h2></div>
+    <div class="sc-body" style="align-items:end;grid-template-columns:2.4fr 1fr">
+      <figure class="sc-fig cols3-fig"><img src="img/climate-responses.jpg" alt="학교 탭에 모인 학생 응답 (반·번호 가림)"><figcaption>학생 응답</figcaption></figure>
+      <p class="pict-big"><span class="sc-pict"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span>참여</p>
+    </div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="핵심은 문항">
+    <div class="sc-head"><span class="sc-chip">① 기후 탐사대 · 성찰</span><h2 class="sc-title">핵심은 문항</h2></div>
+    <div class="sc-body"><blockquote class="sc-q">웹앱은 수단,<br><span class="accent">중요한 건 문항</span></blockquote></div>
+  </section>
+
+  <!-- ════ 사례 ② AI TRACE ════ -->
+  <section class="slide sc sc-pic" data-title="② AI TRACE">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE</span><h2 class="sc-title">디지털 윤리 수업 웹앱</h2></div>
+    <div class="sc-body"><figure class="sc-fig"><video src="img/trace-motion.mp4" poster="img/trace-title.jpg" controls playsinline preload="auto" data-noclick></video></figure></div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="AI 사진 합성">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 동기</span><h2 class="sc-title">AI 사진 합성</h2></div>
+    <div class="sc-body"><blockquote class="sc-q">친구 사진을 AI에 올려<br>합성하며 노는 아이들</blockquote></div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="금지의 한계">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 동기</span><h2 class="sc-title">금지의 한계</h2></div>
+    <div class="sc-body"><blockquote class="sc-q">금지 교육만으로<br>행동이 바뀔지 의문</blockquote></div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="판단 연습">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 동기</span><h2 class="sc-title">판단 연습</h2></div>
+    <div class="sc-body"><blockquote class="sc-q">실제 사례로<br>스스로 판단해 보게</blockquote></div>
+  </section>
+
+  <section class="slide sc sc-pic" data-title="착안">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 제작</span><h2 class="sc-title">착안</h2></div>
+    <div class="sc-body"><figure class="sc-fig"><img src="img/factcheck.jpg" alt="디지털 윤리 콘텐츠 '팩트 체크: 사실 혹은 거짓' 첫 화면"></figure></div>
+  </section>
+
+  <section class="slide sc" data-title="판단 기준">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 제작</span><h2 class="sc-title">판단 기준</h2></div>
+    <div class="sc-body">
+      <ol class="sc-list">
+        <li>나를 알아볼 수 있는 정보가 있나?</li>
+        <li>다른 사람의 정보가 들어 있나?</li>
+        <li>중요 정보는 처음부터 넣지 않았나?</li>
+        <li>답변 속 정보를 공유·게시하지 않나?</li>
+      </ol>
+      <p class="sc-src">출처 · 개인정보보호위원회 「생성형 AI 서비스 이용자를 위한 개인정보 보호 가이드」 (2026.5)</p>
+    </div>
+  </section>
+
+  <section class="slide sc sc-pic" data-title="이야기 구성">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 제작</span><h2 class="sc-title">이야기 구성</h2></div>
+    <div class="sc-body"><figure class="sc-fig"><img src="img/trace-pro.jpg" alt="프롤로그 낯선 DM"></figure></div>
+  </section>
+
+  <section class="slide sc sc-pic" data-title="아는 장소">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 제작</span><h2 class="sc-title">아는 장소</h2></div>
+    <div class="sc-body"><figure class="sc-fig"><img src="img/trace-t1.jpg" alt="DM 속 말로 검색하는 수사 화면"></figure></div>
+  </section>
+
+  <section class="slide sc sc-pic2" data-title="에셋 먼저">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 제작</span><h2 class="sc-title">에셋 먼저</h2></div>
+    <div class="sc-body">
+      <figure class="sc-fig" style="--ar:4/3"><img src="img/trace-sheet.jpg" alt="인물 설정표"></figure>
+      <figure class="sc-fig" style="--ar:4/3"><img src="img/trace-uimaster.jpg" alt="화면 전체 시안"></figure>
+    </div>
+  </section>
+
+  <section class="slide sc sc-pic2" data-title="Claude 구현">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 제작</span><h2 class="sc-title">Claude 구현</h2></div>
+    <div class="sc-body">
+      <figure class="sc-fig" style="--ar:4/3"><img src="img/card2.jpg" alt="상황카드 삽화"></figure>
+      <figure class="sc-fig" style="--ar:4/3"><img src="img/photo2.jpg" alt="글자를 비운 첨부사진 삽화"></figure>
+    </div>
+  </section>
+
+  <section class="slide sc" data-title="개발 과정 (AI TRACE)">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 제작</span><h2 class="sc-title">개발 과정</h2></div>
+    <div class="sc-body"><dl class="sc-dl stack-dl">
+        <dt>화면</dt><dd>HTML · CSS · JS</dd>
+        <dt>데이터</dt><dd>없음 <small>브라우저에서만 돌아감</small></dd>
+        <dt>배포</dt><dd>Netlify</dd>
+        <dt>만든 도구</dt><dd>GPT <small>그림</small> · Claude <small>구현</small></dd>
+    </dl></div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="재도전 규칙">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 제작</span><h2 class="sc-title">재도전 규칙</h2></div>
+    <div class="sc-body"><blockquote class="sc-q">생각 없이 클릭해서는<br>깰 수 없게</blockquote></div>
+  </section>
+
+  <section class="slide sc sc-pic" data-title="따라 쓰기">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 제작</span><h2 class="sc-title">따라 쓰기</h2></div>
+    <div class="sc-body"><figure class="sc-fig"><img src="img/trace-copy.gif" alt="기준 문장을 따라 쓰면 수사 노트에 기록되는 장면 (반복)"></figure></div>
+  </section>
+
+  <section class="slide sc sc-pic2" data-title="수업 장면">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 수업</span><h2 class="sc-title">수업 장면</h2></div>
+    <div class="sc-body">
+      <figure class="sc-fig" style="--ar:4/3"><img src="img/trace-class-1.jpg" alt="AI TRACE를 플레이하는 학생"></figure>
+      <figure class="sc-fig" style="--ar:3/4"><img src="img/trace-class-2.jpg" alt="수사 보고서를 쓰는 학생"></figure>
+    </div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="몰입">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 수업</span><h2 class="sc-title">몰입</h2></div>
+    <div class="sc-body">
+      <blockquote class="sc-q">무작정 클릭한 아이는<br>처음으로 돌아갔다</blockquote>
+    </div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="반응">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 수업</span><h2 class="sc-title">반응</h2></div>
+    <div class="sc-body"><blockquote class="sc-q">생각만큼<br>재밌어하진 않았다</blockquote></div>
+  </section>
+
+  <section class="slide sc sc-cols3" data-title="아쉬운 점">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 성찰</span><h2 class="sc-title">아쉬운 점</h2></div>
+    <div class="sc-body" style="grid-template-columns:repeat(2,1fr)">
+      <p><span class="sc-pict"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>삶으로 연결</p>
+      <p><span class="sc-pict"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>실전성</p>
+    </div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="남은 질문">
+    <div class="sc-head"><span class="sc-chip">② AI TRACE · 성찰</span><h2 class="sc-title">남은 질문</h2></div>
+    <div class="sc-body"><blockquote class="sc-q">게임 속에서는 신중했지만,<br><span class="accent">게임 밖에서도?</span></blockquote></div>
+  </section>
+
+  <!-- ════ 사례 ③ DINO ════ -->
+  <section class="slide sc sc-pic" data-title="③ DINO">
+    <div class="sc-head"><span class="sc-chip">③ DINO</span><h2 class="sc-title">글쓰기 코칭 웹앱</h2></div>
+    <div class="sc-body"><figure class="sc-fig"><video src="img/dino-motion.mp4" poster="img/dino-real-student.jpg" controls playsinline preload="auto" data-noclick></video></figure></div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="“또 고쳐요?”">
+    <div class="sc-head"><span class="sc-chip">③ DINO · 동기</span><h2 class="sc-title">"또 고쳐요?"</h2></div>
+    <div class="sc-body"><blockquote class="sc-q">"몇 줄 써요?"<br>"또 고쳐야 해요?"</blockquote></div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="개별 피드백">
+    <div class="sc-head"><span class="sc-chip">③ DINO · 동기</span><h2 class="sc-title">개별 피드백</h2></div>
+    <div class="sc-body"><blockquote class="sc-q">혼자서 한 명 한 명<br>피드백하기 어렵다</blockquote></div>
+  </section>
+
+  <section class="slide sc sc-versus" data-title="AI의 역할">
+    <div class="sc-head"><span class="sc-chip">③ DINO · 동기</span><h2 class="sc-title">AI의 역할</h2></div>
+    <div class="sc-body">
+      <p class="sc-vs-line">AI는 <span class="accent">코치</span></p>
+      <div class="sc-vs-rows">
+        <p>대신 쓴다</p><span class="sc-arrow">→</span><p>스스로 고치게</p>
+        <p>최종 평가</p><span class="sc-arrow">→</span><p>수정 미션</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide sc" data-title="성취기준 기반 코칭">
+    <div class="sc-head"><span class="sc-chip">③ DINO · 제작</span><h2 class="sc-title"><span class="accent">성취기준</span> 기반 코칭</h2></div>
+    <div class="sc-body">
+      <div class="flow3">
+        <div class="st"><span class="who">교사</span><b>성취기준 분해</b><small>교육과정에 맞춰 기준으로</small></div>
+        <span class="ar">→</span>
+        <div class="st key"><span class="who">AI</span><b>기준대로 피드백</b><small>잘한 점 + 수정 미션</small></div>
+        <span class="ar">→</span>
+        <div class="st"><span class="who">학생</span><b>고쳐 쓰기</b><small>미션 골라 직접 수정</small></div>
+        <div class="loop"><span>다시 피드백</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide sc sc-pic" data-title="학생 화면">
+    <div class="sc-head"><span class="sc-chip">③ DINO · 제작</span><h2 class="sc-title">학생 화면</h2></div>
+    <div class="sc-body"><figure class="sc-fig"><img src="img/dino-student.gif" alt="학생이 코칭을 받으면 피드백과 수정 미션이 뜨는 장면 (반복)"></figure></div>
+  </section>
+
+  <section class="slide sc sc-pic" data-title="교사 화면">
+    <div class="sc-head"><span class="sc-chip">③ DINO · 제작</span><h2 class="sc-title">교사 화면</h2></div>
+    <div class="sc-body"><figure class="sc-fig"><img src="img/dino-teacher.gif" alt="교사 진행 보드에서 수정 과정을 보는 장면 (반복)"></figure></div>
+  </section>
+
+  <section class="slide sc" data-title="개발 과정 (DINO)">
+    <div class="sc-head"><span class="sc-chip">③ DINO · 제작</span><h2 class="sc-title">개발 과정</h2></div>
+    <div class="sc-body"><dl class="sc-dl stack-dl">
+        <dt>화면</dt><dd>Next.js · React</dd>
+        <dt>DB</dt><dd>Neon</dd>
+        <dt>AI</dt><dd>Gemini 3.8 Flash <small>채점기준 코칭</small> · 2.5 Flash-Lite <small>일반</small></dd>
+        <dt>배포</dt><dd>GitHub push → Vercel 자동 배포</dd>
+        <dt>만든 도구</dt><dd>Claude Code</dd>
+    </dl></div>
+  </section>
+
+  <section class="slide sc sc-pic" data-title="실제 피드백">
+    <div class="sc-head"><span class="sc-chip">③ DINO · 제작</span><h2 class="sc-title">실제 피드백</h2></div>
+    <div class="sc-body"><figure class="sc-fig"><img src="img/dino-feedback.jpg" alt="잘한 점과 수정 미션 두 개가 담긴 디노의 피드백"></figure></div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="시행착오">
+    <div class="sc-head"><span class="sc-chip">③ DINO · 제작</span><h2 class="sc-title">시행착오</h2></div>
+    <div class="sc-body">
+      <blockquote class="sc-q">모델·프롬프트를 바꿔도<br>다 잡히진 않았다</blockquote>
+    </div>
+  </section>
+
+  <section class="slide sc sc-pic" data-title="열 번의 퇴고">
+    <div class="sc-head"><span class="sc-chip">③ DINO · 수업</span><h2 class="sc-title">열 번의 퇴고</h2></div>
+    <div class="sc-body"><figure class="sc-fig"><img src="img/dino-real-compare.jpg" alt="1차와 10차 비교"></figure></div>
+  </section>
+
+  <section class="slide sc sc-cols3" data-title="교실 적용">
+    <div class="sc-head"><span class="sc-chip">③ DINO · 수업</span><h2 class="sc-title">교실 적용</h2></div>
+    <div class="sc-body">
+      <p>구체적 미션</p>
+      <p>집중 지도</p>
+      <p>평가는 교사가</p>
+    </div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="남은 질문">
+    <div class="sc-head"><span class="sc-chip">③ DINO · 성찰</span><h2 class="sc-title">남은 질문</h2></div>
+    <div class="sc-body"><blockquote class="sc-q">무엇을 맡기고 남길지는<br><span class="accent">교사가 정한다</span></blockquote></div>
+  </section>
+
+  <!-- ════ 체험 ════ -->
+  <section class="slide sc" data-title="직접 해 보기">
+    <div class="sc-head"><span class="sc-chip">체험</span><h2 class="sc-title">직접 해 보기</h2></div>
+    <div class="sc-body" style="flex-direction:column;gap:32px">
+      <div class="cards3 sc-qr">
+        <div class="tile"><img src="img/qr-climate.svg" alt="기후 탐사대 QR"><h3>기후 탐사대</h3><p class="meta"><a href="https://script.google.com/macros/s/AKfycby-ahsOSiTpGR5fnvS9rUhULYY-_Q_gzD_6qBsE_oNrCvPp4sslgJspycZDIjNjITNraQ/exec" target="_blank">기후 탐사대 열기 ↗</a></p></div>
+        <div class="tile"><img src="img/qr-trace.svg" alt="AI TRACE QR"><h3>AI TRACE</h3><p class="meta"><a href="https://ai-trace-case01.netlify.app" target="_blank">ai-trace-case01.netlify.app</a></p></div>
+        <div class="tile"><img src="img/qr-dino.svg" alt="DINO QR"><h3>DINO</h3><p class="meta"><a href="https://dino-writing-coach.vercel.app/join/DN9YQV" target="_blank">참여 코드 DN9YQV ↗</a></p></div>
+      </div>
+      <p class="sc-src" style="text-align:center;width:100%;max-width:none">자료·링크 모음 · <a href="https://is.gd/sel2026" target="_blank">is.gd/sel2026</a></p>
+    </div>
+  </section>
+
+  <!-- ════ 마무리 ════ -->
+  <section class="slide sc" data-title="생각해 볼 점">
+    <div class="sc-head"><span class="sc-chip">마무리</span><h2 class="sc-title">생각해 볼 점</h2></div>
+    <div class="sc-body"><div class="think3">
+      <div class="tile"><h3>① 배움이 일어나나?</h3><p>재미있게 참여했다고<br>배움이 일어나진 않는다</p></div>
+      <div class="tile"><h3>② 장치를 많이 넣으면?</h3><p>노트북 <span class="accent">vs</span> 책</p></div>
+      <div class="tile"><h3>③ 어떤 자료를 고를까</h3><p>화려함 <span class="accent">vs</span> 배움</p></div>
+    </div></div>
+  </section>
+
+  <section class="slide sc sc-pic2" data-title="세 사례가 남긴 고민">
+    <div class="sc-head"><span class="sc-chip">마무리</span><h2 class="sc-title">세 사례가 남긴 고민</h2></div>
+    <div class="sc-body">
+      <figure class="sc-fig" style="--ar:16/13"><img src="img/climate-app.jpg" alt="기후 탐사대"><figcaption style="margin-top:28px;font-family:var(--font-d);font-weight:var(--w-d);letter-spacing:var(--ls-d);font-size:80px;line-height:1.2;color:var(--ink)">문항</figcaption></figure>
+      <figure class="sc-fig" style="--ar:16/13"><img src="img/trace-title.jpg" alt="AI TRACE"><figcaption style="margin-top:28px;font-family:var(--font-d);font-weight:var(--w-d);letter-spacing:var(--ls-d);font-size:80px;line-height:1.2;color:var(--ink)">삶으로</figcaption></figure>
+      <figure class="sc-fig" style="--ar:16/13"><img src="img/dino-real-student.jpg" alt="DINO"><figcaption style="margin-top:28px;font-family:var(--font-d);font-weight:var(--w-d);letter-spacing:var(--ls-d);font-size:80px;line-height:1.2;color:var(--ink)">신뢰</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="slide sc sc-quote" data-title="그럼에도 불구하고">
+    <div class="sc-head"><span class="sc-chip">마무리</span><h2 class="sc-title">그럼에도 불구하고</h2></div>
+    <div class="sc-body"><blockquote class="sc-q">자료의 형태는 바뀌어도</blockquote></div>
+  </section>
+
+  <section class="slide sc sc-versus" data-title="판단 = 교사의 전문성">
+    <div class="sc-head"><span class="sc-chip">마무리</span><h2 class="sc-title">웹앱 시대의 대가</h2></div>
+    <div class="sc-body"><p class="sc-vs-line">판단 <span class="accent">=</span> 교사의 전문성</p></div>
+  </section>
+
+  <section class="slide sc sc-cover" data-title="감사합니다">
+    <div class="sc-cover-main">
+      <div class="sc-cover-text">
+        <h1 class="sc-big">감사합니다</h1>
+        <p class="sc-sub">인천효성남초 양상경</p>
+      </div>
+      <div class="sc-dot">Q&amp;A</div>
+    </div>
+  </section>
+
+</div></div>
+
+
+<nav id="nav"></nav>
+
+<script>
+const BRANDS = [
+  ['apple', '애플'], ['baemin', '배민'], ['toss', '토스'], ['daangn', '당근'], ['kakaocorp', '카카오'],
+  ['netflix', '넷플릭스'], ['spotify', '스포티파이'], ['lego', '레고'],
+  ['aesop', '이솝'], ['porsche', '포르쉐'], ['mckinsey', '맥킨지'],
+];
+const slides = [...document.querySelectorAll('.slide')];
+const nav = document.getElementById('nav');
+const toc = document.getElementById('toc');
+const view = document.getElementById('view');
+const brandBox = document.getElementById('brand');
+const toast = document.getElementById('toast');
+let cur = 0;
+
+slides.forEach((s, i) => {
+  const dot = document.createElement('button');
+  dot.setAttribute('aria-label', s.dataset.title);
+  dot.onclick = () => go(i);
+  nav.appendChild(dot);
+
+  // 목차는 칩(챕터)별로 묶는다. 칩 없는 장(표지·감사합니다)은 지금 묶음에 붙는다
+  const chip = s.querySelector('.sc-chip')?.textContent.split(' · ')[0].trim();   // 칩의 ' · 단계' 앞(사례 이름)으로 묶는다
+  let g = toc.lastElementChild;
+  if (!g || (chip && g.dataset.chip && g.dataset.chip !== chip)) {
+    g = document.createElement('li');
+    g.className = 'grp';
+    g.innerHTML = '<button class="gh"><span class="gt"></span><span class="gc"></span></button><ol></ol>';
+    g.querySelector('.gh').onclick = () => go(i);
+    toc.appendChild(g);
+  }
+  if (chip && !g.dataset.chip) { g.dataset.chip = chip; g.querySelector('.gt').textContent = chip; }
+  // 칩의 ' · 단계'(동기·제작·수업·성찰)가 있으면 항목 앞에 "동기 1 - " 식으로 붙인다 (단계 안 순번)
+  const stage = s.querySelector('.sc-chip')?.textContent.split(' · ')[1]?.trim();
+  let label = s.dataset.title;
+  if (stage) {
+    if (g.dataset.stage !== stage) { g.dataset.stage = stage; g.dataset.sn = 0; }
+    g.dataset.sn = +g.dataset.sn + 1;
+    label = `${stage} ${g.dataset.sn} - ${label}`;
+  }
+  const li = document.createElement('li');
+  li.innerHTML = `<button class="item"><span class="n">${i + 1}</span><span></span></button>`;
+  li.querySelector('span:last-child').textContent = label;
+  li.firstChild.onclick = () => go(i);
+  g.querySelector('ol').appendChild(li);
+  g.querySelector('.gc').textContent = g.querySelectorAll('.item').length;
+});
+
+BRANDS.forEach(([id, name]) => {
+  const b = document.createElement('button');
+  b.dataset.brand = id; b.textContent = name;
+  b.onclick = () => setBrand(id, true);
+  brandBox.appendChild(b);
+});
+
+// 장 이동. showAll이면 그 장의 [data-step]을 다 보인 채로 연다 (이전 키로 돌아올 때)
+function go(i, showAll = false) {
+  cur = Math.max(0, Math.min(slides.length - 1, i));
+  slides.forEach((s, k) => s.classList.toggle('on', k === cur));
+  steps().forEach(el => el.classList.toggle('shown', showAll));
+  [...nav.children].forEach((b, k) => b.classList.toggle('on', k === cur));
+  [...toc.querySelectorAll('.item')].forEach((b, k) => b.classList.toggle('on', k === cur));
+  [...toc.children].forEach(g => g.classList.toggle('open', !!g.querySelector('.item.on')));
+  history.replaceState(null, '', '#' + (cur + 1));
+  // 영상 장: 열리면 처음으로 돌려 두고 클릭해야 재생, 떠나면 멈춤
+  slides.forEach((s, k) => s.querySelectorAll('video').forEach(v => {
+    v.pause(); if (k === cur) v.currentTime = 0;
+  }));
+}
+function steps() { return [...slides[cur].querySelectorAll('[data-step]')]; }
+// 다음: 숨은 단계가 있으면 하나 보이고, 없으면 다음 장
+function next() {
+  const hidden = steps().find(el => !el.classList.contains('shown'));
+  if (hidden) hidden.classList.add('shown');
+  else if (cur < slides.length - 1) go(cur + 1);
+}
+// 이전: 보인 단계가 있으면 마지막 것을 숨기고, 없으면 이전 장
+function prev() {
+  const shown = steps().filter(el => el.classList.contains('shown'));
+  if (shown.length) shown[shown.length - 1].classList.remove('shown');
+  else if (cur > 0) go(cur - 1, true);
+}
+
+function fit() {
+  const s = Math.min(view.clientWidth / 1920, view.clientHeight / 1080);
+  document.getElementById('stage').style.transform = `translate(-50%, -50%) scale(${s})`;
+}
+
+// 저장소는 목차 열림만 기억한다 (테마·브랜드는 html의 data-theme·data-brand가 기본값)
+function save(k, v) { try { localStorage.setItem(k, v); } catch {} }
+function load(k) { try { return localStorage.getItem(k); } catch { return null; } }
+
+function setTheme(t) {
+  document.documentElement.dataset.theme = t;
+  document.querySelectorAll('#theme button').forEach(b => b.classList.toggle('on', b.dataset.theme === t));
+}
+let toastTimer;
+function setBrand(id, announce) {
+  if (!BRANDS.some(([b]) => b === id)) id = 'apple';
+  document.documentElement.dataset.brand = id;
+  brandBox.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.brand === id));
+  if (announce) {
+    toast.textContent = BRANDS.find(([b]) => b === id)[1];
+    toast.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 1200);
+  }
+}
+function nextBrand(step) {
+  const i = BRANDS.findIndex(([b]) => b === document.documentElement.dataset.brand);
+  setBrand(BRANDS[(i + step + BRANDS.length) % BRANDS.length][0], true);
+}
+function toggleSide(show) {
+  document.body.classList.toggle('no-side', !show);
+  save('deck-side', show ? '1' : '0');
+}
+
+document.querySelectorAll('#theme button').forEach(b => b.onclick = () => setTheme(b.dataset.theme));
+document.getElementById('close-side').onclick = () => toggleSide(false);
+document.getElementById('open-side').onclick = () => toggleSide(true);
+
+// 글자 키는 e.code로 받아 한글 입력 상태(ㄹ·ㅅ·ㅇ·ㅡ)에서도 된다
+addEventListener('keydown', e => {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+  if (['ArrowRight', 'PageDown', ' '].includes(e.key) || (e.key === 'Enter' && !e.shiftKey)) { e.preventDefault(); next(); }
+  else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key) || (e.key === 'Enter' && e.shiftKey)) { e.preventDefault(); prev(); }
+  else if (e.code === 'KeyF') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+  else if (e.code === 'KeyT') toggleSide(document.body.classList.contains('no-side'));
+  else if (e.code === 'KeyD') setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+  else if (e.code === 'KeyM') nextBrand(e.shiftKey ? -1 : 1);
+});
+// 창 크기·목차 열고 닫기 모두 #view 크기 변화로 받아 다시 맞춘다
+new ResizeObserver(fit).observe(view);
+
+// 화면 클릭: 오른쪽 절반은 다음, 왼쪽 절반은 이전 (링크·버튼·입력·글 선택 중에는 안 넘김)
+view.addEventListener('click', e => {
+  if (e.target.closest('a, button, input, textarea, select, pre, [data-noclick]')) return;
+  if (String(getSelection()).length) return;
+  const r = view.getBoundingClientRect();
+  e.clientX - r.left > r.width / 2 ? next() : prev();
+});
+
+document.querySelectorAll('[data-copy]').forEach(btn => {
+  btn.onclick = async () => {
+    const id = btn.dataset.copy;
+    const text = document.getElementById(id).innerText;
+    let ok = true;
+    try { await navigator.clipboard.writeText(text); }
+    catch { const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); ok = document.execCommand('copy'); t.remove(); }
+    const c = document.getElementById('c-' + id);
+    c.textContent = ok ? '복사됨 ✓' : '복사 안 됨 — 직접 선택해 복사';
+    c.classList.add('show'); setTimeout(() => c.classList.remove('show'), 1500);
+  };
+});
+
+setTheme(document.documentElement.dataset.theme || 'dark');
+setBrand(document.documentElement.dataset.brand || 'apple', false);
+document.documentElement.classList.add('preload');
+if (load('deck-side') === '0') document.body.classList.add('no-side');
+fit();
+requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.remove('preload')));
+go((parseInt(location.hash.slice(1)) || 1) - 1);
+</script>
+</body>
+</html>
